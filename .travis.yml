@@ -11,11 +11,12 @@ matrix:
       sudo: true
 
 install:
-    - python setup.py install
+  - python setup.py install
+  - pip install coverage
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 script:
     - export TARGET="-m json_processor.test.runtests"
-    - python -bb $TARGET
-    - python -O $TARGET
-    - LANG=C python $TARGET
-    - LANG=en_US.utf-8 python $TARGET
+    - coverage run $TARGET
