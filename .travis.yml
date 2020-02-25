@@ -1,0 +1,21 @@
+language: python
+sudo: false
+
+matrix:
+  include:
+    - python: "2.7"
+      dist: xenial
+      sudo: true
+    - python: "3.7"
+      dist: xenial
+      sudo: true
+
+install:
+    - python setup.py install
+
+script:
+    - export TARGET="-m json_processor.test.runtests"
+    - python -bb $TARGET
+    - python -O $TARGET
+    - LANG=C python $TARGET
+    - LANG=en_US.utf-8 python $TARGET
