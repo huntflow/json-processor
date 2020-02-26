@@ -1,0 +1,2 @@
+ignore:
+  - "json_processor/test"
