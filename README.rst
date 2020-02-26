@@ -15,6 +15,7 @@ Example
 -------
 
 .. code-block:: python
+
     from json_processor import json_process
 
     schema = {
