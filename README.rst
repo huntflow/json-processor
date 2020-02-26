@@ -1,15 +1,17 @@
 JSON processor
 ==============
 
-Simply convert one JSON to another.
-
 .. image:: https://travis-ci.org/huntflow/json-processor.svg?branch=master
   :target: https://travis-ci.org/huntflow/json-processor
 .. image:: https://codecov.io/gh/huntflow/json-processor/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/huntflow/json-processor
 
+
+Simply convert one JSON to another.
+
 * **Easy to use.** Create a simple JSON conversion schema and pass it to processor
 * **Rich.** It uses ``jsonpointer`` so you can create complex processors
+
 
 Example
 -------
