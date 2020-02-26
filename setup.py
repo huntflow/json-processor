@@ -11,7 +11,7 @@ with open('json_processor/version.py') as f:
 install_requires = ['jsonpointer >= 2.0']
 
 
-with open('README.md') as f:
+with open('README.rst') as f:
     kwargs['long_description'] = f.read()
 
 
