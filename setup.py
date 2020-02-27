@@ -26,6 +26,9 @@ setup(
     download_url='https://github.com/huntflow/json-processor/tarball/{}'.format(version),
     packages=['json_processor', 'json_processor.test'],
     install_requires=install_requires,
+    entry_points = {
+        'console_scripts': ['json_process=json_processor.__main__:main'],
+    },
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',

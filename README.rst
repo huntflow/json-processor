@@ -68,3 +68,23 @@ Example
     # Outputs:
     # {'simple_key': 'Just a string', 'values': [{'id': 100, 'name': 'Item 1'}, {'id': 150, 'name': 'Item 2'}]}
 
+
+Installation
+------------
+
+From PyPi
+~~~~~~~~~
+
+.. code-block:: bash
+
+    pip install json_processor
+
+
+Command line tool
+-----------------
+
+After installation you can use ``json_process`` utility:
+
+.. code-block:: bash
+
+    json_process <schema_file> <json_file>
