@@ -20,6 +20,14 @@ class CastTest(unittest.TestCase):
             }
         }}, {'id': '-1'}), {'id': -1})
 
+        self.assertEqual(json_process({'type': 'object', 'value': {
+            'id': {
+                'type': 'jsonpointer',
+                'value': '/id',
+                'cast': 'integer'
+            }
+        }}, {'id': None}), {'id': None})
+
     def test_cast_null_if_empty(self):
         self.assertEqual(json_process({'type': 'object', 'value': {
             'id': {

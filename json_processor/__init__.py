@@ -12,6 +12,13 @@ def nothing(value):
     return value
 
 
+def try_int(value, default=None):
+    try:
+        return int(value)
+    except:
+        return default
+
+
 def null_if_empty(value):
     if isinstance(value, dict):
         has_any = any(map(lambda x: x is not None, value.values()))
@@ -23,7 +30,7 @@ def null_if_empty(value):
 
 
 _CAST_TYPES = {
-    'integer': int,
+    'integer': try_int,
     'null_if_empty': null_if_empty,
     None: nothing
 }
