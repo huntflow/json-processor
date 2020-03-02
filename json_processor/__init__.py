@@ -8,12 +8,23 @@ from .version import version
 __version__ = version
 
 
-def nothing(x):
-    return x
+def nothing(value):
+    return value
+
+
+def null_if_empty(value):
+    if isinstance(value, dict):
+        has_any = any(map(lambda x: x is not None, value.values()))
+        return value if has_any else None
+    elif isinstance(value, list):
+        return None if len(value) == 0 else value
+
+    return value
 
 
 _CAST_TYPES = {
     'integer': int,
+    'null_if_empty': null_if_empty,
     None: nothing
 }
 
@@ -32,7 +43,7 @@ def json_process(schema, data):
         for key, value in schema['value'].items():
             result[key] = _CAST_TYPES[schema.get('cast')](json_process(value, data))
 
-        return result
+        return _CAST_TYPES[schema.get('cast')](result)
     elif schema_type == 'jsonpointer':
         return _CAST_TYPES[schema.get('cast')](resolve_pointer(data, schema['value']))
     elif schema_type == 'array':
@@ -44,6 +55,6 @@ def json_process(schema, data):
             new_data['$value'] = value
             result.append(json_process(schema['value'], new_data))
 
-        return result
+        return _CAST_TYPES[schema.get('cast')](result)
     else:
         raise Exception('Unexpected type {}'.format(schema_type))
