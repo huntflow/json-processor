@@ -45,7 +45,7 @@ def json_process(schema, data):
 
         return _CAST_TYPES[schema.get('cast')](result)
     elif schema_type == 'jsonpointer':
-        return _CAST_TYPES[schema.get('cast')](resolve_pointer(data, schema['value']))
+        return _CAST_TYPES[schema.get('cast')](resolve_pointer(data, schema['value'], None))
     elif schema_type == 'array':
         values = json_process(schema['from'], data)
         new_data = deepcopy(data)
