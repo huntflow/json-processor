@@ -8,6 +8,10 @@ from .version import version
 __version__ = version
 
 
+class PopException(BaseException):
+    pass
+
+
 def nothing(value):
     return value
 
@@ -29,9 +33,17 @@ def null_if_empty(value):
     return value
 
 
+def pop_if_empty(value):
+    if null_if_empty(value) is None:
+        raise PopException()
+
+    return value
+
+
 _CAST_TYPES = {
     'integer': try_int,
     'null_if_empty': null_if_empty,
+    'pop_if_empty': pop_if_empty,
     None: nothing
 }
 
@@ -48,7 +60,10 @@ def json_process(schema, data):
     if schema_type == 'object':
         result = {}
         for key, value in schema['value'].items():
-            result[key] = _CAST_TYPES[schema.get('cast')](json_process(value, data))
+            try:
+                result[key] = _CAST_TYPES[schema.get('cast')](json_process(value, data))
+            except PopException:
+                continue
 
         return _CAST_TYPES[schema.get('cast')](result)
     elif schema_type == 'jsonpointer':
