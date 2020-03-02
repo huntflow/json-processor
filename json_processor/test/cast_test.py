@@ -113,4 +113,18 @@ class CastTest(unittest.TestCase):
                 'cast': 'pop_if_empty'
             },
             'flag': True
+        }}, {'id': 1}), {'data': {'id': 1}, 'flag': True})
+
+        self.assertEqual(json_process({'type': 'object', 'value': {
+            'data': {
+                'type': 'object',
+                'value': {
+                    'id': {
+                        'type': 'jsonpointer',
+                        'value': '/id'
+                    }
+                },
+                'cast': 'pop_if_empty'
+            },
+            'flag': True
         }}, {'id': None}), {'flag': True})
