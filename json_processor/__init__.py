@@ -72,10 +72,12 @@ def json_process(schema, data):
         values = json_process(schema['from'], data)
         new_data = deepcopy(data)
         result = []
-        for index, value in enumerate(values):
-            new_data['$index0'] = index
-            new_data['$value'] = value
-            result.append(json_process(schema['value'], new_data))
+
+        if values:
+            for index, value in enumerate(values):
+                new_data['$index0'] = index
+                new_data['$value'] = value
+                result.append(json_process(schema['value'], new_data))
 
         return _CAST_TYPES[schema.get('cast')](result)
     else:

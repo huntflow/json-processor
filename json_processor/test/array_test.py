@@ -35,3 +35,25 @@ class ArrayTest(unittest.TestCase):
                 ]
             }
         }), [{'id': '100', 'name': 'item1', 'index': 0}, {'id': '150', 'name': 'item2', 'index': 1}])
+
+    def test_no_array(self):
+        self.assertListEqual(json_process({
+            'type': 'array',
+            'from': {
+                'type': 'jsonpointer',
+                'value': '/data/items'
+            },
+            'value': {
+                'type': 'object',
+                'value': {
+                    'id': {
+                        'type': 'jsonpointer',
+                        'value': '/$value/foreign'
+                    }
+                }
+            }
+        }, {
+            'data': {
+
+            }
+        }), [])
