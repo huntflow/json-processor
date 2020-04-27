@@ -23,6 +23,7 @@ TEST_MODULES = [
     'json_processor.test.base_test',
     'json_processor.test.cast_test',
     'json_processor.test.array_test',
+    'json_processor.test.list_test',
 ]
 
 

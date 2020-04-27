@@ -49,6 +49,9 @@ _CAST_TYPES = {
 
 
 def json_process(schema, data):
+    if isinstance(schema, list):
+        return [json_process(x, data) for x in schema]
+
     if not isinstance(schema, dict):
         return schema
 
